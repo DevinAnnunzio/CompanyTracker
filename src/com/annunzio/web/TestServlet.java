@@ -51,17 +51,11 @@ public class TestServlet extends HttpServlet {
 				String email = myRs.getString("company_name");
 				out.println(email);
 			}
-			
-			
+					
 		}  catch(Exception e){
 			e.printStackTrace();
 		}
 		
-		
-		
-		
 	}
-
-
 
 }
