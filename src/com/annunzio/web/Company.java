@@ -21,6 +21,12 @@ public class Company {
 		super();
 		this.companyName = companyName;
 	}
+	
+	public Company(int id, String companyName) {
+		super();
+		this.id = id;
+		this.companyName = companyName;
+	}
 
 	public int getId() {
 		return id;
@@ -53,6 +59,10 @@ public class Company {
 		this.headquarters = headquarters;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Company [id=" + id + ", companyName=" + companyName + ", ceo=" + ceo + ", stockPrice=" + stockPrice
+				+ ", headquarters=" + headquarters + "]";
+	}
 
 }
