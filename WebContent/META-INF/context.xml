@@ -1,10 +1,10 @@
 <Context>
 
-  <Resource name="jdbc/client_tracker" 
+  <Resource name="jdbc/company_tracker" 
   			auth="Container" type="javax.sql.DataSource"
                maxActive="25" maxIdle="10" maxWait="10000"
                username="root" password="password" 
                driverClassName="com.mysql.cj.jdbc.Driver"
-               url="jdbc:mysql://localhost:3306/company_tracker"/>
+               url="jdbc:mysql://localhost:3306/company_tracker?useSSL=false"/>
 
 </Context>
