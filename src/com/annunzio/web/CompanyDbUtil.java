@@ -42,6 +42,8 @@ public class CompanyDbUtil {
 				companies.add(tempComp);
 			}
 			
+			System.out.println(companies);;
+			
 			return companies;
 			
 		} 

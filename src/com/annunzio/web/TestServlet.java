@@ -34,6 +34,14 @@ public class TestServlet extends HttpServlet {
 		Statement myStmt = null;
 		ResultSet myRs = null;
 		
+		CompanyDbUtil cdbU = new CompanyDbUtil(dataSource);
+		try {
+			cdbU.getCompanies();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		
 		try {
 			//DataSource is same as connection pool
