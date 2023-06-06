@@ -1,6 +1,7 @@
 package com.annunzio.web;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -18,11 +19,13 @@ import javax.sql.DataSource;
 @WebServlet("/CompanyControllerServlet")
 public class CompanyControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-      
+    
+	
 	
 	private CompanyDbUtil companyDbUtil;
-	private DataSource dataSource;
 	@Resource(name="jdbc/company_tracker")
+	private DataSource dataSource;
+
 	
 	//Servlet lifecycle method
 	@Override
@@ -68,11 +71,8 @@ public class CompanyControllerServlet extends HttpServlet {
 		try {
 			List<Company> companies = companyDbUtil.getCompanies();
 			request.setAttribute("COMPANY_LIST", companies);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/list_companies.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/list-companies.jsp");
 			
-			for(Company c : companies) {
-				System.out.println("The company: " + c);
-			}
 			dispatcher.forward(request, response);
 			
 		} catch(Exception e) {
@@ -86,7 +86,25 @@ public class CompanyControllerServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		try {
+			addCompany(request,response);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void addCompany(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+		String companyName = request.getParameter("companyName");
+		String companyCeo = request.getParameter("companyCeo");
+		String companyHeadquarters = request.getParameter("companyHeadquarters");
+		
+		Company compToAdd = new Company(companyName, companyCeo, companyHeadquarters);
+		
+		companyDbUtil.addCompany(compToAdd);
+		response.sendRedirect(request.getContextPath() + "/CompanyControllerServlet?command=LIST");
+		
+		
+		
 	}
 
 }

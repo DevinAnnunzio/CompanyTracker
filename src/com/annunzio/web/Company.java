@@ -16,6 +16,20 @@ public class Company {
 		this.stockPrice = stockPrice;
 		this.headquarters = headquarters;
 	}
+	public Company(int id, String companyName, String ceo, String headquarters) {
+		super();
+		this.id = id;
+		this.companyName = companyName;
+		this.ceo = ceo;
+		this.headquarters = headquarters;
+	}
+	
+	public Company(String companyName, String ceo, String headquarters) {
+		super();
+		this.companyName = companyName;
+		this.ceo = ceo;
+		this.headquarters = headquarters;
+	}
 	
 	public Company(String companyName) {
 		super();
