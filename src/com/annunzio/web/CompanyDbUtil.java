@@ -110,6 +110,28 @@ public class CompanyDbUtil {
 		
 		
 	}
+
+	public void deleteCompany(int companyId) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		
+		try {
+			myConn = dataSource.getConnection();
+			
+			String sql = "DELETE FROM company " + "WHERE id =?;";
+
+			myStmt = myConn.prepareStatement(sql);
+			myStmt.setInt(1,companyId);
+
+			myStmt.execute();
+			
+		}
+		
+		finally {
+				close(myConn, myStmt, null);
+		}
+	}
 	
 
 }

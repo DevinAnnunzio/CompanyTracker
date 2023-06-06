@@ -57,6 +57,8 @@ public class CompanyControllerServlet extends HttpServlet {
 			case "LIST":
 				listCompanies(request, response);
 				break;
+			case "DELETE":
+				deleteCompany(request,response);
 			default: 
 				listCompanies(request, response);
 			}
@@ -64,6 +66,18 @@ public class CompanyControllerServlet extends HttpServlet {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void deleteCompany(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			int companyId = Integer.valueOf(request.getParameter("companyId"));
+			companyDbUtil.deleteCompany(companyId);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	private void listCompanies(HttpServletRequest request, HttpServletResponse response) {

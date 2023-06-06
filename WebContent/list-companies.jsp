@@ -35,7 +35,7 @@ List<Company> allCompanies = (List<Company>) request.getAttribute("COMPANY_LIST"
 				<td><%=c.getStockPrice() %></td>
 				<td><%=c.getHeadquarters() %></td>
 				<td> <a href="">Update</a>
-				 	 <a href="">Delete</a> 
+				 	 <a href="CompanyControllerServlet?command=DELETE&companyId=<%=(c.getId())%>">Delete</a> 
 				</td>
 			</tr>
 			<%}%>
