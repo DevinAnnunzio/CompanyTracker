@@ -46,11 +46,13 @@ public class CompanyDbUtil {
 				if(myRs.getString("headquarters") != null) {
 					 headquarters = myRs.getString("headquarters");
 				}
+				if(myRs.getString("stock_price") == null) {
+					
+				}
 				Company tempComp = new Company(id, companyName, ceo, headquarters);
 				
 				companies.add(tempComp);
 			}
-			
 			
 			return companies;
 			
@@ -113,6 +115,7 @@ public class CompanyDbUtil {
 
 	public void deleteCompany(int companyId) throws SQLException {
 		// TODO Auto-generated method stub
+		
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
 		
@@ -122,15 +125,69 @@ public class CompanyDbUtil {
 			String sql = "DELETE FROM company " + "WHERE id =?;";
 
 			myStmt = myConn.prepareStatement(sql);
-			myStmt.setInt(1,companyId);
-
+			myStmt.setInt(1, companyId);
 			myStmt.execute();
-			
 		}
 		
 		finally {
 				close(myConn, myStmt, null);
 		}
+	}
+
+	public Company getCompany(String companyId) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+		Company theCompany = null;
+
+		int theCompanyId = Integer.valueOf(companyId);
+		
+		try {
+			myConn = dataSource.getConnection();
+			String sql = "SELECT * FROM company WHERE id = ?;";
+			myStmt = myConn.prepareStatement(sql);
+			myStmt.setInt(1, theCompanyId);
+			myRs = myStmt.executeQuery();
+			
+			if(myRs.next()) {
+				//Create the company obj here
+				String companyName = myRs.getString("company_name");
+				String ceo = myRs.getString("ceo");
+				String headquarters = myRs.getString("headquarters");
+				theCompany = new Company(theCompanyId, companyName, ceo, headquarters);
+			} 
+			return theCompany;
+		}
+		
+		
+		finally {
+			close(myConn, myStmt, myRs);
+		}
+		
+	}
+
+	public void submitEdit(Company compToEdit) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		try {
+			myConn = dataSource.getConnection();
+			String sql = "UPDATE company " + "SET company_name=?, ceo=?, headquarters=? " + "WHERE id = ?;";
+			myStmt = myConn.prepareStatement(sql);
+			myStmt.setString(1, compToEdit.getCompanyName());
+			myStmt.setString(2, compToEdit.getCeo());
+			myStmt.setString(3, compToEdit.getHeadquarters());
+			myStmt.setInt(4, compToEdit.getId());
+			
+			myStmt.execute();
+			
+		}
+		
+		finally {
+			close(myConn, myStmt, null);
+		}
+		
 	}
 	
 

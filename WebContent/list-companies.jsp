@@ -26,7 +26,12 @@ List<Company> allCompanies = (List<Company>) request.getAttribute("COMPANY_LIST"
 				<th>Action</th>
 			</tr>
 			
-			<%for(Company c: allCompanies){%>
+			<%
+			if(allCompanies == null){
+			Company c = new Company(-99, "ERROR", "NO DATA", 0.0, "NOWHERE");
+			} else{				
+			for(Company c: allCompanies){
+			%>
 			
 			<tr>
 				<td><%=c.getId() %></td>
@@ -34,11 +39,13 @@ List<Company> allCompanies = (List<Company>) request.getAttribute("COMPANY_LIST"
 				<td><%=c.getCeo() %></td>
 				<td><%=c.getStockPrice() %></td>
 				<td><%=c.getHeadquarters() %></td>
-				<td> <a href="">Update</a>
+				<td> <a href="https://www.google.com/">Update</a>
 				 	 <a href="CompanyControllerServlet?command=DELETE&companyId=<%=(c.getId())%>">Delete</a> 
+				 	<a href="CompanyControllerServlet?command=LOAD_EDIT&companyId=<%=(c.getId())%>">Edit</a>
 				</td>
 			</tr>
-			<%}%>
+			<%}
+			}%>
 			
 		
 		</table>

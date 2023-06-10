@@ -59,6 +59,16 @@ public class CompanyControllerServlet extends HttpServlet {
 				break;
 			case "DELETE":
 				deleteCompany(request,response);
+				break;
+			
+			case "LOAD_EDIT":
+				loadEdit(request,response);
+				break;
+				
+			case "SUBMIT_EDIT":
+				submitEdit(request, response);
+				break;
+				
 			default: 
 				listCompanies(request, response);
 			}
@@ -68,11 +78,18 @@ public class CompanyControllerServlet extends HttpServlet {
 		}
 	}
 
-	private void deleteCompany(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	private void submitEdit(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
+		int compId = Integer.valueOf(request.getParameter("companyId"));
+		String compName = request.getParameter("companyName");
+		String ceoName = request.getParameter("ceoName");
+		String headquarters = request.getParameter("headquarters");
+		
+		Company compToEdit = new Company(compId, compName, ceoName, headquarters);
+		
 		try {
-			int companyId = Integer.valueOf(request.getParameter("companyId"));
-			companyDbUtil.deleteCompany(companyId);
+			companyDbUtil.submitEdit(compToEdit);
+			listCompanies(request, response);
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -80,13 +97,48 @@ public class CompanyControllerServlet extends HttpServlet {
 		
 	}
 
-	private void listCompanies(HttpServletRequest request, HttpServletResponse response) {
+	private void loadEdit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			String companyId = request.getParameter("companyId");
+			Company comp = companyDbUtil.getCompany(companyId);
+			request.setAttribute("COMPANY_TO_LOAD", comp);
+			
+			if(comp.getId() == -1) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/search-for-company-error.jsp");
+				dispatcher.forward(request, response);
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/edit-company-form.jsp");
+				dispatcher.forward(request, response);
+			}
+			
+			//ISSUE WITH NULL POINTER EXCEPTION, POSSIBLY LINKED TO OBJECTS BEING SET HAVING NULL VALUE
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void deleteCompany(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			int companyId = Integer.valueOf(request.getParameter("companyId"));
+			companyDbUtil.deleteCompany(companyId);
+			listCompanies(request,response);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void listCompanies(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		try {
 			List<Company> companies = companyDbUtil.getCompanies();
 			request.setAttribute("COMPANY_LIST", companies);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/list-companies.jsp");
-			
 			dispatcher.forward(request, response);
 			
 		} catch(Exception e) {
@@ -116,8 +168,6 @@ public class CompanyControllerServlet extends HttpServlet {
 		
 		companyDbUtil.addCompany(compToAdd);
 		response.sendRedirect(request.getContextPath() + "/CompanyControllerServlet?command=LIST");
-		
-		
 		
 	}
 
