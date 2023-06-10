@@ -1,8 +1,8 @@
-# Company Tracker
+# Company Tracker - MVC architecture
 
 ## *Devin Annunzio*
 
-**Company Tracker** is a simple CRUD app utilizing MVC architecture
+**Company Tracker** is a simple CRUD app utilizing MVC architecture.  The app allows a user to add a company he may want to follow.  Currently the stock price is not able to be changed as I plan to fetch the data using an API.  They can however register a company name, ceo, and headquarters location. 
 
 ## Functionality
 
@@ -11,10 +11,12 @@ The current functionality:
 * [✅] The user can delete a company from their list
 * [✅] Create an edit field for if the user wants to change some information in database
 
-## Future Plans
-Future plans:
+## Future plans
+Future ideas to implement:
 * [] Work on UI to make it more presentable
 * [] Possibly fetch stock price from a web API using the update tab
+* [] Possibly add form validation with JS
+* [] Possibly add SSL and authentication
 
 
 ## Screen shots
