@@ -2,7 +2,7 @@
 
 ## *Devin Annunzio*
 
-**Company Tracker** is a simple CRUD app utilizing MVP architecture
+**Company Tracker** is a simple CRUD app utilizing MVC architecture
 
 ## Functionality
 
@@ -27,7 +27,7 @@ Future plans:
 
 
 ## Notes
-This project was built to play around with Java/Servlets/MVP architecture
+This project was built to play around with Java/Servlets/MVC architecture
 
 
 ## Contributing
