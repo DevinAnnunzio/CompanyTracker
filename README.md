@@ -9,10 +9,10 @@
 The current functionality:
 * [✅] The user can add a company to their list
 * [✅] The user can delete a company from their list
+* [✅] Create an edit field for if the user wants to change some information in database
 
 ## Future Plans
 Future plans:
-* [] Create an edit field for if the user wants to change some information
 * [] Work on UI to make it more presentable
 * [] Possibly fetch stock price from a web API using the update tab
 
