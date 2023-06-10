@@ -2,7 +2,7 @@
 
 ## *Devin Annunzio*
 
-**Company Tracker** is a simple CRUD app utilizing MVC architecture.  The app allows a user to add a company he may want to follow.  Currently the stock price is not able to be changed as I plan to fetch the data using an API.  They can however register a company name, ceo, and headquarters location. 
+**Company Tracker** is a simple CRUD app utilizing MVC architecture using Java, servlets, tomcat, and mySql.  The app allows a user to add a company he may want to follow.  Currently the stock price is not able to be changed as I plan to fetch the data using an API.  They can however register a company name, ceo, and headquarters location. 
 
 ## Functionality
 
